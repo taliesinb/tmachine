@@ -80,7 +80,7 @@ func (p *tmachine) Step() {
 var blank01 = []string{"□", "0", "1"}
 var cross01 = []string{"×", "0", "1"}
 var leftright = []string{"←", "→"}
-var updown = []string{"←", "→"}
+var updown = []string{"↑", "↓"}
 
 func (p *tmachine) String() string {
 
@@ -101,7 +101,7 @@ func (p *tmachine) String() string {
 	switch i {
 	case None:   
 	case Move:   sym = " " + leftright[v&1] 
-	case Back:   sym = "↩ " + string('0' + v)
+	case Back:   sym = "⟲ " + string('0' + v)
 	case Climb:  sym = " " + updown[(v>>2)&1]
 	case Branch: sym = "?" + blank01[v&3] + updown[(v>>2)&1]
 	case Write:  sym = " " +cross01[v&3]
