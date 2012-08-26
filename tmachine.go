@@ -77,8 +77,8 @@ func (p *tmachine) Step() {
 	}
 }
 
-var blank01 = []string{"□", "0", "1"}
-var cross01 = []string{"×", "0", "1"}
+var blank01 = []string{"_", "0", "1"}
+var cross01 = []string{"x", "0", "1"}
 var leftright = []string{"←", "→"}
 var updown = []string{"↑", "↓"}
 
@@ -114,11 +114,15 @@ func (p *tmachine) String() string {
 	)
 }
 
-func (p *tmachine) PrintRun(n int) {
+func (p *tmachine) PrintRun(n int, compress bool) {
 	fmt.Println(p)
-	for i := 0; i < n; i++ {
-		p.Step()
-		fmt.Println(p)
+	max := 0
+	for i := 0; i < n ; p.Step() {
+		if !compress || p.pos > max { 
+			i++
+			max = p.pos
+			fmt.Println(p)
+		}
 	}
 }
 
@@ -137,5 +141,5 @@ func main() {
 	tm.pos = 2
 	tm.tape[1] = 2
 
-	tm.PrintRun(512)
+	tm.PrintRun(24, true)
 }
